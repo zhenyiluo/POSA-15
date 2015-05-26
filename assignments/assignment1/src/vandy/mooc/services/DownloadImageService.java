@@ -67,16 +67,26 @@ public class DownloadImageService extends IntentService {
                                     String directoryPathname,
                                     Handler downloadHandler) {
         // Create an intent that will download the image from the web.
-    	// TODO -- you fill in here, replacing "null" with the proper
+    	// You fill in here, replacing "null" with the proper
     	// code, which involves (1) setting the URL as "data" to the
     	// intent, (2) putting the request code as an "extra" to the
     	// intent, (3) creating and putting a Messenger as an "extra"
     	// to the intent so the DownloadImageService can send the path
-    	// to the image file back to the MainActivity, and (3) putting
+    	// to the image file back to the MainActivity, and (4) putting
     	// the directory pathname as an "extra" to the intent
         // to tell the Service where to place the image within
         // external storage.
-        return null;
+    	Intent intent = new Intent(context, DownloadImageService.class);
+    	
+    	intent.setData(url);
+    	
+    	intent.putExtra(REQUEST_CODE, requestCode);
+    	
+    	intent.putExtra(MESSENGER, new Messenger(downloadHandler));
+    	
+    	intent.putExtra(DIRECTORY_PATHNAME, directoryPathname);
+    	
+        return intent;
     }
 
     /**
@@ -127,20 +137,25 @@ public class DownloadImageService extends IntentService {
     public void onHandleIntent(Intent intent) {
         // Get the URL associated with the Intent data.
         // @@ TODO -- you fill in here.
+    	Uri url = intent.getData();
 
         // Get the directory pathname where the image will be stored.
         // @@ TODO -- you fill in here.
+    	String directoryPathname = intent.getExtras().getString(DIRECTORY_PATHNAME);
 
-        // Download the requested image.
+    	// Download the requested image.
         // @@ TODO -- you fill in here.
 
         // Extract the Messenger stored as an extra in the
         // intent under the key MESSENGER.
         // @@ TODO -- you fill in here.
+    	 Messenger messenger = (Messenger)
+                 intent.getExtras().get(MESSENGER);
 
         // Send the path to the image file back to the
         // MainActivity via the messenger.
         // @@ TODO -- you fill in here.
+//    	 sendPath(messenger, directoryPathname, url);
     }
 
     /**
