@@ -31,9 +31,7 @@ public class DownloadImagesBoundService extends LifecycleLoggingService {
      */
     public static Intent makeIntent(Context context) {
         // Create an intent that will download the image from the web.
-    	// TODO -- you fill in here, replacing null with the proper
-    	// code.
-        return null;
+        return new Intent(context, DownloadImagesBoundService.class);
     }
 
     /**
@@ -43,10 +41,10 @@ public class DownloadImagesBoundService extends LifecycleLoggingService {
     public void onCreate() {
         // Create a RequestHandler used to handle request Messages
         // sent from an Activity.
-    	// TODO -- you fill in here.
-
+    	mRequestHandler = new RequestHandler(this);
+    	
         // Create a Messenger that encapsulates the RequestHandler.
-    	// TODO -- you fill in here.
+    	mRequestMessenger = new Messenger(mRequestHandler);
     }
 
     /**
@@ -69,6 +67,6 @@ public class DownloadImagesBoundService extends LifecycleLoggingService {
         super.onDestroy();
 
         // Shutdown the RequestHandler.
-    	// TODO -- you fill in here.
+        mRequestHandler.shutdown();
     }
 }

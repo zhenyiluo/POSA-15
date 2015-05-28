@@ -164,12 +164,12 @@ public abstract class ImageOpsImpl {
     /**
      * Initiate the service binding protocol.
      */
-    public void bindService() { /* no op */ }
+    public abstract void bindService();
 
     /**
      * Initiate the service unbinding protocol.
      */
-    public void unbindService() { /* no op */ }
+    public abstract void unbindService();
 
    /**
      * Add whatever URL has been entered into the text field if that
